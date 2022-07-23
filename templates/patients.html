@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <meta name="copyright" content="MACode ID, https://macodeid.com/" />
+
+    <title>Hemodialysis Department-Patients</title>
+
+    <link rel="stylesheet" href="../static/css/maicons.css" />
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+
+    <link
+      rel="stylesheet"
+      href="../static/vendor/owl-carousel/css/owl.carousel.css"
+    />
+
+    <link rel="stylesheet" href="../static/vendor/animate/animate.css" />
+
+    <link rel="stylesheet" href="../static/css/theme.css" />
+
+    <link rel="stylesheet" href="../static/css/table.css" />
+
+    <link rel="stylesheet" href="../static/css/comment.css" />
+  </head>
+
+  <body>
+    <!-- Back to top button -->
+    <div class="back-to-top"></div>
+
+    <header>
+      <div class="topbar">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 text-sm">
+              <div class="site-info">
+                <a href="#"
+                  ><span class="mai-call text-primary"></span> +00 000 0000
+                  0000</a
+                >
+                <span class="divider">|</span>
+                <a href="#"
+                  ><span class="mai-mail text-primary"></span>
+                  hemodialysis@example.net</a
+                >
+              </div>
+            </div>
+            <div class="col-sm-4 text-right text-sm">
+              <div class="social-mini-button">
+                <a href="https://www.facebook.com/"
+                  ><span class="mai-logo-facebook-f"></span
+                ></a>
+                <a href="https://twitter.com/"
+                  ><span class="mai-logo-twitter"></span
+                ></a>
+                <a href="https://www.instagram.com/"
+                  ><span class="mai-logo-instagram"></span
+                ></a>
+              </div>
+            </div>
+          </div>
+          <!-- .row -->
+        </div>
+        <!-- .container -->
+      </div>
+      <!-- .topbar -->
+
+      <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+        <div class="container">
+          {% if session.user_a %}
+          <a class="navbar-brand" href="{{url_for('admin')}}"
+            ><span class="text-primary">Hemodialysis</span>-Department</a
+          >
+          {% else %}
+          <a class="navbar-brand" href="{{url_for('doctor')}}"
+            ><span class="text-primary">Hemodialysis</span>-Department</a
+          >
+          {% endif %}
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupport"
+            aria-controls="navbarSupport"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupport">
+            <ul class="navbar-nav ml-auto">
+              {% if session.user_d %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('doctor')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('patients')}}">Patients</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('doctors')}}">Doctors</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('appointments')}}"
+                  >Appointments</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary ml-lg-3" href="{{url_for('index')}}"
+                  >Sign Out</a
+                >
+              </li>
+              {% else %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('admin')}}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('editTable')}}"
+                  >Dashboard</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('doctors')}}">Doctors</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('patients')}}">Patients</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('appointments')}}"
+                  >Appointments</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('devices')}}">Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-primary ml-lg-3" href="{{url_for('index')}}"
+                  >Sign Out</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          <!-- .navbar-collapse -->
+        </div>
+        <!-- .container -->
+      </nav>
+    </header>
+
+    <div
+      class="page-banner overlay-dark bg-image"
+      style="background-image: url(../static/img/bg_image_1.jpg)"
+    >
+      <div class="banner-section">
+        <div class="container text-center wow fadeInUp">
+          <nav aria-label="Breadcrumb">
+            <ol
+              class="breadcrumb breadcrumb-dark bg-transparent justify-content-center py-0 mb-2"
+            >
+              {% if session.user_a %}
+              <li class="breadcrumb-item">
+                <a href="{{url_for('admin')}}">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Patients
+              </li>
+              {% else %}
+              <li class="breadcrumb-item">
+                <a href="{{url_for('doctor')}}">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Patients
+              </li>
+              {% endif %}
+            </ol>
+          </nav>
+          <h1 class="font-weight-normal">Patients</h1>
+        </div>
+        <!-- .container -->
+      </div>
+      <!-- .banner-section -->
+    </div>
+    <!-- .page-banner -->
+
+    <div class="page-section">
+      <div class="container">
+        <div class="row">
+          <div class="col md-12">
+            <div class="header_fixed">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for r in Data %}
+                  <tr>
+                    <td>{{r.0}}</td>
+                    <td>{{r.1}} {{r.12}}</td>
+                    <td>
+                      <a
+                        href="/reserve/{{r.0}}"
+                        data-toggle="modal"
+                        data-target="#modaledit{{r.0}}"
+                        >Reserve</a
+                      >
+                      <a
+                        href="/upload_scansadmin/{{r.0}}"
+                        data-toggle="modal"
+                        data-target="#modaledit1{{r.0}}"
+                        >Upload Scans</a
+                      >
+                    </td>
+                  </tr>
+                  <div id="modaledit{{r.0}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Add Reservation</h4>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                          >
+                            &times;
+                          </button>
+                        </div>
+
+                        <div class="modal-body">
+                          <form action="{{ url_for('reserve') }}" method="POST">
+                            <div class="form-group">
+                              <label>Date:</label>
+                              <input type="hidden" name="id" value="{{r.0}}" />
+
+                              <input
+                                type="date"
+                                class="form-control"
+                                name="date"
+                                value="{{r.3}}"
+                                required
+                              />
+                            </div>
+                            <div class="form-group">
+                              <label>Time:</label>
+
+                              <select
+                                name="time"
+                                id="appt"
+                                class="form-control"
+                                placeholder=""
+                                required
+                              >
+                                <option value="9:00">9:00 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="3:00">3:00 PM</option>
+                                <option value="6:00">6:00 PM</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <button class="btn btn-primary" type="sbumit">
+                                Add
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="modaledit1{{r.0}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Upload scan</h4>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                          >
+                            &times;
+                          </button>
+                        </div>
+
+                        <div class="modal-body">
+                          <form action='/upload_scansadmin' method="POST" enctype="multipart/form-data">
+                            <dl>
+                                <p>
+                                    <div class="custom-file">
+                                      <input type="hidden" value="{{r.0}}" name="admin">
+                                      <div class="form-group">
+                                      <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" name="file" required >
+                                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Upload Scans</button>
+
+                                    </div>
+                                </p>
+                            </dl>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
+              <div class="comment-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row px-md-3">
+          <div class="col-sm-6 col-lg-3 py-3">
+            <h5>Company</h5>
+            <ul class="footer-menu">
+              <li><a href="{{url_for('aboutus')}}">About Us</a></li>
+              <li><a href="{{url_for('contact')}}">Contact us</a></li>
+              <!-- <li><a href="#">Career</a></li> -->
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+            <h5>More</h5>
+            <ul class="footer-menu">
+              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="{{url_for('doctors')}}">Join as Doctors</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+            <h5>Patient services</h5>
+            <ul class="footer-menu">
+              <li><a href="#">Make appointments</a></li>
+              <li><a href="#">In-person evaluation</a></li>
+              <li><a href="#">Pharmacy service</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-3 py-3">
+            <h5>Contact</h5>
+            <p class="footer-link mt-2">adress is written here</p>
+            <a href="#" class="footer-link">000-000-0000</a>
+            <a href="#" class="footer-link">hemodialysise@example.net</a>
+  
+            <h5 class="mt-3">Social Media</h5>
+            <div class="footer-sosmed mt-3">
+              <a href="https://www.facebook.com/" target="_blank"><span class="mai-logo-facebook-f"></span></a>
+              <a href="https://twitter.com/" target="_blank"><span class="mai-logo-twitter"></span></a>
+              <a href="https://plus.google.com/" target="_blank"><span class="mai-logo-google-plus-g"></span></a>
+              <a href="https://www.instagram.com/" target="_blank"><span class="mai-logo-instagram"></span></a>
+              <!-- <a href="https://gb.linkedin.com/" target="_blank"><span class="mai-logo-linkedin"></span></a> -->
+            </div>
+          </div>
+        </div>
+  
+        <hr>
+  
+        <!-- <p id="copyright">Copyright &copy; 2020 <a href="https://macodeid.com/" target="_blank">MACode ID</a>. All right reserved</p> -->
+      </div>
+    </footer>
+  </body>
+
+  <script src="../static/js/jquery-3.5.1.min.js"></script>
+
+  <script src="../static/js/bootstrap.bundle.min.js"></script>
+
+  <script src="../static/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+  <script src="../static/vendor/wow/wow.min.js"></script>
+
+  <script src="../static/js/theme.js"></script>
+</html>
