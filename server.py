@@ -34,7 +34,7 @@ def phonenumber(num):
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sara2001",
+    passwd="root",
     database="hemodialysis"
 )
 
